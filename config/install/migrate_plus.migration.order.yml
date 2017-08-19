@@ -1,0 +1,46 @@
+id: order
+label: Orders
+migration_group: gundara_commerce
+source:
+  plugin: gundara_order
+process:
+  order_id: order_id
+  order_number: order_number
+  revision_id: revision_id
+  type:
+    plugin: default_value
+    default_value: 'default'
+  uid:
+    plugin: migration_lookup
+    migration: user
+    source: uid
+  state:
+    plugin: commerce_migrate_order_state_default
+    source: status
+  created: created
+  placed: created
+  changed: changed
+  mail: mail
+  data: data
+  store:
+    plugin: default_value
+    default_value: 1
+  total_price:
+    plugin: commerce_migrate_commerce_price
+    source: commerce_order_total
+  order_items:
+    plugin: commerce_migrate_commerce_reference
+    source: commerce_line_items
+    target_key: line_item_id
+  billing_profile:
+    plugin: commerce_migrate_commerce_reference_revision
+    migration: billing_profile
+    source: commerce_customer_billing
+    no_stub: true
+destination:
+  plugin: 'entity:commerce_order'
+migration_dependencies:
+  required:
+  - line_item
+  - user
+  - billing_profile

@@ -1,0 +1,32 @@
+id: file
+label: Gundara files
+migration_group: gundara_commerce
+source:
+  plugin: d7_file
+  constants:
+    source_base_path: 'https://gundara.com/sites/default/files/'
+process:
+  fid: fid
+  filename: filename
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - uri
+  filemime: filemime
+  status: status
+  created: timestamp
+  changed: timestamp
+  uid: uid
+destination:
+  plugin: entity:file
+migration_dependencies: {}

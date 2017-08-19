@@ -1,0 +1,34 @@
+id: line_item
+label: Line items
+migration_group: gundara_commerce
+source:
+  plugin: d7_line_item
+process:
+  order_item_id: line_item_id
+  revision_id: revision_id
+  type:
+    plugin: default_value
+    default_value: 'default'
+  uid:
+    plugin: migration
+    migration: user
+    source: uid
+  quantity: quantity
+  status: status
+  created: created
+  changed: changed
+  unit_price:
+    plugin: commerce_migrate_commerce_price
+    source: commerce_unit_price
+  total_price:
+    plugin: commerce_migrate_commerce_price
+    source: commerce_total
+  purchased_entity:
+    plugin: commerce_migrate_commerce_reference
+    source: commerce_product
+    target_key: product_id
+  title:
+    plugin: gundara_line_item_label
+    variation_migration: product_variation
+destination:
+  plugin: 'entity:commerce_order_item'

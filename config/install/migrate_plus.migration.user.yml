@@ -1,0 +1,18 @@
+id: user
+label: User migration
+migration_group: gundara_commerce
+migration_tags:
+  - Drupal 7
+source:
+  plugin: d7_user
+destination:
+  plugin: entity:user
+process:
+  uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  access: access
+  status: status
+  created: created
+migration_dependencies: {}

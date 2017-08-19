@@ -1,0 +1,29 @@
+id: product
+label: Products
+migration_group: gundara_commerce
+source:
+  plugin: d7_product_display
+process:
+  product_id: nid
+  title: title
+  type:
+    plugin: default_value
+    default_value: 'default'
+  uid: uid
+  body: body
+  'body/format':
+    plugin: default_value
+    default_value: 'basic_html'
+  status: status
+  created: created
+  changed: changed
+  path: path
+  variations:
+    plugin: commerce_migrate_commerce_reference
+    source: variations_field
+    target_key: product_id
+destination:
+  plugin: 'entity:commerce_product'
+migration_dependencies:
+  required:
+    - product_variation

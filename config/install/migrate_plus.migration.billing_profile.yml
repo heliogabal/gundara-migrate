@@ -1,0 +1,24 @@
+id: billing_profile
+label: Customer profiles
+migration_group: gundara_commerce
+source:
+  plugin: d7_billing_profile
+process:
+  profile_id: profile_id
+  type: type
+  uid:
+    plugin: migration
+    migration: user
+    source: uid
+  address:
+    plugin: addressfield
+    source: commerce_customer_address
+  status: status
+  created: created
+  changed: changed
+  data: data
+destination:
+  plugin: 'entity:profile'
+migration_dependencies:
+  required:
+    - user

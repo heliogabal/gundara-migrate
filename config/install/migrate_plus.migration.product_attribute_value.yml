@@ -1,0 +1,13 @@
+id: product_attribute_value
+label: Products attribute values
+migration_group: gundara_commerce
+source:
+  plugin: gundara_product_attribute_value
+  vocabulary:
+    - container
+process:
+  attribute_value_id: tid
+  attribute: machine_name
+  name: name
+destination:
+  plugin: 'entity:commerce_product_attribute_value'

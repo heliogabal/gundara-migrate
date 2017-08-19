@@ -1,0 +1,35 @@
+id: payment
+label: Payment Transactions
+migration_group: gundara_commerce
+source:
+  plugin: gundara_payment
+process:
+  type:
+    plugin: default_value
+    default_value: 'payment_default'
+  uid:
+    plugin: migration_lookup
+    migration: user
+    source: uid
+  order_id: order_id
+  payment_method:
+    plugin: default_value
+    default_value: 1
+  payment_gateway:
+    plugin: default_value
+    default_value: 'migrated_payment_reference'
+  remote_id: remote_id
+  message: message
+  message_variables: message_variables
+  'amount/number':
+    plugin: gundara_amount
+    source: amount
+  'amount/currency_code': currency_code
+  status: status
+  remote_status: remote_status
+  completed: changed
+destination:
+  plugin: 'entity:commerce_payment'
+migration_dependencies:
+  required:
+    - order

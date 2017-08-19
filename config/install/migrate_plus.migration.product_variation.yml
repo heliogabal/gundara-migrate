@@ -1,0 +1,45 @@
+id: product_variation
+label: Products (variations)
+migration_group: gundara_commerce
+source:
+  plugin: d7_product
+process:
+  variation_id: product_id
+  sku: sku
+  title: title
+  type:
+    plugin: default_value
+    default_value: 'default'
+  language: language
+  uid: uid
+  status: status
+  created: created
+  changed: changed
+  data: data
+  attribute_container:
+    plugin: migration_lookup
+    migration: product_attribute_value
+    source: field_container_size
+  dimensions: field_dimensions
+  weight:
+    plugin: physical_weight
+    source: field_weight
+  price:
+    plugin: commerce_migrate_commerce_price
+    source: commerce_price
+  field_product_image:
+    plugin: iterator
+    source: field_images
+    process:
+      target_id: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+destination:
+  plugin: 'entity:commerce_product_variation'
+migration_dependencies:
+  required:
+    - file
+    - product_attribute_value
+
