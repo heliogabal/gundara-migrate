@@ -5,7 +5,7 @@ package: Gundara
 version: 8.x-dev
 core: 8.x
 dependencies:
-  - commerce_migrate_commerce
+  - commerce_migrate
   - migrate_drupal
   - migrate_plus
   - migrate_tools
